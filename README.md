@@ -1,8 +1,10 @@
 # Download
 
-[Script 1:](https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink1-modified.user.js)
+[Script 1](https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink1-modified.user.js)
 
-[Script 2:](https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink2-modified.user.js)
+[Script 2](https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink2-modified.user.js)
+
+[Script 3](https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink3-modified.user.js)
 
 ---
 

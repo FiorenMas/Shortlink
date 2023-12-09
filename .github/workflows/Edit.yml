@@ -1,0 +1,24 @@
+name: Edit
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+jobs:
+  patch1:
+    name: Edit
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Edit
+        run: bash editor.sh
+
+      - name: Release
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          files: |
+            ./release/*
+          name: Userscript
+          tag_name: all
+          body: Download Here

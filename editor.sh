@@ -14,4 +14,4 @@ file2_content=${file2_content//"function redirect(url, blog = true) {location = 
 file2_content=${file2_content//"// @downloadURL https://update.greasyfork.org/scripts/443888/Additional%20Bypass.meta.js"/"// @downloadURL https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink2-modified.user.js"}
 file2_content=${file2_content//"// @updateURL https://update.greasyfork.org/scripts/443888/Additional%20Bypass.meta.js"/"// @updateURL https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink2-modified.user.js"}
 echo "$file2_content" > ./release/ShortLink2-modified.user.js
-echo -e "\e[32mThe file has been modified and saved as BypassAllShortLink-modified.user.js\e[0m"
+echo -e "\e[32mThe file has been modified and saved\e[0m"

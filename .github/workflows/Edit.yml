@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Edit
         run: bash editor.sh
-
+        env:
+          repository: ${{ github.repository }}
       - name: Release
         uses: softprops/action-gh-release@v0.1.15
         with:

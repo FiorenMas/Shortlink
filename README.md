@@ -1,5 +1,3 @@
-This repository automatic edit skip ads in BypassAllShortlink Script
-
 # [Download](https://github.com/FiorenMas/Shortlink/releases/download/all/BypassAllShortLink-modified.user.js )
 
 ---

@@ -1,7 +1,7 @@
 name: Edit
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 */6 * * *"
   workflow_dispatch:
 jobs:
   patch1:
@@ -22,3 +22,12 @@ jobs:
           name: Userscript
           tag_name: all
           body: Download Here
+      - name: Delete workflow runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 0
+          keep_minimum_runs: 1
+      - name: Keep workflow alive
+        uses: gautamkrishnar/keepalive-workflow@v1

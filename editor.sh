@@ -23,7 +23,7 @@ echo "$file2_content" > ./release/ShortLink2-modified.user.js
 file3_content=$(cat base3.user.js)
 file3_content=${file3_content//"let $ = window.jQuery;let respect = 'https://free4u.nurul-huda.or.id/?BypassResults=';"/"let $ = window.jQuery;let respect = '';"}
 file3_content=${file3_content//"function redirect(url, blog = true) {location = blog ? 'https://rotator.nurul-huda.sch.id/?BypassResults=' + url : url;}"/"function redirect(url, blog = true) {location = blog ? '' + url : url;}"}
-file1_content=${file1_content//"$('a.get-link').text('Bypassed by Bloggerpemula');"/"$('a.get-link').text('');"}
+file3_content=${file3_content//"$('a.get-link').text('Bypassed by Bloggerpemula');"/"$('a.get-link').text('');"}
 file3_content=${file3_content//"// @updateURL   https://openuserjs.org/meta/Bloggerpemula/Bypass_All_Shortlinks_Manual_Captcha.meta.js"/"// @updateURL https://github.com/$repository/releases/download/all/ShortLink3-modified.user.js"}
 echo "$file3_content" > ./release/ShortLink3-modified.user.js
 sed -i "s/let list = \['free4u.nurul-huda.or.id', 'rotator.nurul-huda.sch.id'\]; if (list.includes(location.host)) {} else {let support = document.createElement('iframe');support.src = 'https:\/\/purdasseer.com\/idB2Nn6Y8NC0SFF\/61239';support.style.cssText = \"width: 1%; height: 1%; border: none;\";document.body.appendChild(support);}/let list = \['free4u.nurul-huda.or.id', 'rotator.nurul-huda.sch.id'\];/" release/ShortLink3-modified.user.js

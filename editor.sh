@@ -13,7 +13,7 @@ file1_content=${file1_content//"Thanks for using Bypass All Shortlinks Scripts a
 file1_content=${file1_content//"// @downloadURL https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.user.js"/"// @downloadURL https://github.com/$repository/releases/download/all/ShortLink1-modified.user.js"}
 file1_content=${file1_content//"// @updateURL https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.meta.js"/"// @updateURL https://github.com/$repository/releases/download/all/ShortLink1-modified.user.js"}
 echo "$file1_content" > ./release/ShortLink1-modified.user.js
-sed -i "s/if \(List\.includes\(location\.host\)\) \{\} else \{let support = document\.createElement\('iframe'\);support\.src = 'https:\/\/purdasseer\.com\/idB2Nn6Y8NC0SFF\/61239';support\.style\.cssText = "width: 1%; height: 1%; border: none;";document\.body\.appendChild\(support\);\}//g" "release/ShortLink1-modified.user.js"
+sed -i '/if (List.includes(location.host)) {} else {let support = document.createElement('iframe');support.src = 'https:\/\/purdasseer.com\/idB2Nn6Y8NC0SFF\/61239';support.style.cssText = "width: 1%; height: 1%; border: none;";document.body.appendChild(support);}/d' release/ShortLink1-modified.user.js
 
 file2_content=$(cat base2.user.js)
 file2_content=${file2_content//"function redirect(url, blog = true) {location = blog ? 'https://rotator.nurul-huda.sch.id/?BypassResults=' + url : url;}"/"function redirect(url, blog = true) {location = blog ? '' + url : url;}"}

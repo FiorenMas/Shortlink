@@ -13,7 +13,7 @@ file1_content=${file1_content//"Thanks for using Bypass All Shortlinks Scripts a
 file1_content=${file1_content//"// @downloadURL https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.user.js"/"// @downloadURL https://github.com/$repository/releases/download/all/ShortLink1-modified.user.js"}
 file1_content=${file1_content//"// @updateURL https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.meta.js"/"// @updateURL https://github.com/$repository/releases/download/all/ShortLink1-modified.user.js"}
 echo "$file1_content" > ./release/ShortLink1-modified.user.js
-sed -i '/if.*document\.createElement(.*iframe.*else/d' release/ShortLink1-modified.user.js
+sed -i '/if (List.includes(location.host)) {} else {let support = document.createElement('iframe');support.src = 'https://purdasseer.com/idB2Nn6Y8NC0SFF/61239';support.style.cssText = \"width: 1%; height: 1%; border: none;\";document.body.appendChild(support);}/d' release/ShortLink1-modified.user.js
 
 file2_content=$(cat base2.user.js)
 file2_content=${file2_content//"function redirect(url, blog = true) {location = blog ? 'https://rotator.nurul-huda.sch.id/?BypassResults=' + url : url;}"/"function redirect(url, blog = true) {location = blog ? '' + url : url;}"}
@@ -28,6 +28,5 @@ file3_content=${file3_content//"$('a.get-link').text('Bypassed by Bloggerpemula'
 file3_content=${file3_content//"Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula"/""}
 file3_content=${file3_content//"// @updateURL   https://openuserjs.org/meta/Bloggerpemula/Bypass_All_Shortlinks_Manual_Captcha.meta.js"/"// @updateURL https://github.com/$repository/releases/download/all/ShortLink3-modified.user.js"}
 echo "$file3_content" > ./release/ShortLink3-modified.user.js
-sed -i '/if.*document\.createElement(.*iframe.*else/d' release/ShortLink1-modified.user.js
-
+sed -i '/if (List.includes(location.host)) {} else {let support = document.createElement('iframe');support.src = 'https://purdasseer.com/idB2Nn6Y8NC0SFF/61239';support.style.cssText = \"width: 1%; height: 1%; border: none;\";document.body.appendChild(support);}/d' release/ShortLink3-modified.user.js
 echo -e "\e[32mThe files has been modified and saved\e[0m"

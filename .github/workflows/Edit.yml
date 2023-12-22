@@ -18,10 +18,8 @@ jobs:
         run: |
           npm install async
           mkdir ./release
-          chmod +x Edit.js
-          ./Edit.js
-        env:
-          repository: ${{ github.repository }}
+          chmod +x editor.js
+          ./editor.js
       - name: Release
         uses: softprops/action-gh-release@v0.1.15
         with:

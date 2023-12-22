@@ -11,18 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "lts/*"
       - name: Edit
         run: bash editor.sh
-        env:
-          repository: ${{ github.repository }}
-      - name: Edit 2
-        run: |
-          chmod +x 1.js
-          ./1.js
         env:
           repository: ${{ github.repository }}
       - name: Release

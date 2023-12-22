@@ -3,7 +3,6 @@ on:
   schedule:
     - cron: "0 1 * * *"
   workflow_dispatch:
-  push:
 jobs:
   patch1:
     name: Edit
@@ -11,8 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
       - name: Edit
-        run: bash editor.sh
+        run: |
+          npm install async
+          mkdir ./release
+          chmod +x Edit.js
+          ./Edit.js
         env:
           repository: ${{ github.repository }}
       - name: Release

@@ -2,12 +2,15 @@
 const fs = require('fs');
 const https = require('https');
 const async = require('async');
+const folder = './release/';
 
-const files = [
+const filesToDownload = [
   {name: 'base1.user.js', url: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.user.js'},
   {name: 'base2.user.js', url: 'https://update.greasyfork.org/scripts/443888/Additional%20Bypass.user.js'},
   {name: 'base3.user.js', url: 'https://openuserjs.org/install/Bloggerpemula/Bypass_All_Shortlinks_Manual_Captcha.user.js'}
 ];
+
+const filesToEdit = ['ShortLink1-modified.user.js', 'ShortLink2-modified.user.js', 'ShortLink3-modified.user.js'];
 
 const editRules = {
   'base1.user.js': {
@@ -16,11 +19,13 @@ const editRules = {
       'https://rotator.nurul-huda.sch.id/?BypassResults=',
       "$('a.get-link').text('Bypassed by Bloggerpemula');",
       'Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula',
+      'Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula',
+      'Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula',
       'if (List.includes(location.host)) {} else {let support = document.createElement(\'iframe\');support.src = \'https://purdasseer.com/idB2Nn6Y8NC0SFF/61239\';support.style.cssText = "width: 1%; height: 1%; border: none;";document.body.appendChild(support);}'
     ],
     replaceStrings: [
       {old: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.user.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink1-modified.user.js'},
-      {old: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.meta.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink1-modified.user.js'}
+      {old: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.meta.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink1-modified.meta.js'}
     ],
     outputName: 'ShortLink1-modified.user.js',
     outputPath: './release/'
@@ -31,7 +36,7 @@ const editRules = {
     ],
     replaceStrings: [
       {old: 'https://update.greasyfork.org/scripts/443888/Additional%20Bypass.user.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink2-modified.user.js'},
-      {old: 'https://update.greasyfork.org/scripts/443888/Additional%20Bypass.meta.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink2-modified.user.js'}
+      {old: 'https://update.greasyfork.org/scripts/443888/Additional%20Bypass.meta.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink2-modified.meta.js'}
     ],
     outputName: 'ShortLink2-modified.user.js',
     outputPath: './release/'
@@ -42,10 +47,12 @@ const editRules = {
       'https://rotator.nurul-huda.sch.id/?BypassResults=',
       "$('a.get-link').text('Bypassed by Bloggerpemula');",
       'Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula',
+      'Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula',
+      'Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula',
       'if (List.includes(location.host)) {} else {let support = document.createElement(\'iframe\');support.src = \'https://purdasseer.com/idB2Nn6Y8NC0SFF/61239\';support.style.cssText = "width: 1%; height: 1%; border: none;";document.body.appendChild(support);}'
     ],
     replaceStrings: [
-      {old: 'https://openuserjs.org/meta/Bloggerpemula/Bypass_All_Shortlinks_Manual_Captcha.meta.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink3-modified.user.js'}
+      {old: 'https://openuserjs.org/meta/Bloggerpemula/Bypass_All_Shortlinks_Manual_Captcha.meta.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink3-modified.meta.js'}
     ],
     outputName: 'ShortLink3-modified.user.js',
     outputPath: './release/'
@@ -93,9 +100,36 @@ function editFile(file, callback) {
   });
 }
 
-function downloadAndEditAll(files, callback) {
+function createMetaFile(file, callback) {
+  fs.readFile(folder + file, 'utf-8', (err, data) => {
+    if (err) {
+      console.error(err);
+      callback(err);
+      return;
+    }
+    const index = data.indexOf('// ==/UserScript==');
+    if (index !== -1) {
+      const newData = data.slice(0, index + '// ==/UserScript=='.length);
+      const newFile = file.replace('.user.js', '.meta.js');
+      fs.writeFile(folder + newFile, newData, 'utf-8', (err) => {
+        if (err) {
+          console.error(err);
+          callback(err);
+          return;
+        }
+        console.log('File ' + file + ' edited and saved as ' + newFile);
+        callback(null);
+      });
+    } else {
+      console.log('File ' + file + ' does not have the line // ==/UserScript==');
+      callback(null);
+    }
+  });
+}
+
+function downloadAndEditAll(filesToDownload, filesToEdit, callback) {
   let downloadTasks = [];
-  for (let file of files) {
+  for (let file of filesToDownload) {
     downloadTasks.push((cb) => downloadFile(file, cb));
   }
   async.parallel(downloadTasks, (err) => {
@@ -105,7 +139,7 @@ function downloadAndEditAll(files, callback) {
       return;
     }
     let editTasks = [];
-    for (let file of files) {
+    for (let file of filesToDownload) {
       editTasks.push((cb) => editFile(file, cb));
     }
     async.parallel(editTasks, (err) => {
@@ -114,12 +148,23 @@ function downloadAndEditAll(files, callback) {
         callback(err);
         return;
       }
-      callback(null);
+      let metaTasks = [];
+      for (let file of filesToEdit) {
+        metaTasks.push((cb) => createMetaFile(file, cb));
+      }
+      async.parallel(metaTasks, (err) => {
+        if (err) {
+          console.error(err);
+          callback(err);
+          return;
+        }
+        callback(null);
+      });
     });
   });
 }
 
-downloadAndEditAll(files, (err) => {
+downloadAndEditAll(filesToDownload, filesToEdit, (err) => {
   if (err) {
     console.error(err);
     process.exit(1);

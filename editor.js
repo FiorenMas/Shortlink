@@ -99,6 +99,7 @@ const editRules = {
       {old: '使用说明', new: 'instructions'},
       {old: '助手免费开源', new: 'free and open source'},
       {old: 'https://www.youxiaohou.com/instantpage.user.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/instantpage-modified.meta.js'},
+      {old: 'https://www.youxiaohou.com/instantpage.user.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/instantpage-modified.user.js'},
       {old: `{
                 name: 'enable_store_link',
                 value: true

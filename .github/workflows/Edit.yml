@@ -21,13 +21,13 @@ jobs:
           chmod +x editor.js
           ./editor.js
       - name: Release
-        uses: softprops/action-gh-release@v0.1.15
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          files: |
-            ./release/*
-          name: Userscript
-          tag_name: all
-          body: Download Here
+          branch: release
+          default_author: github_actions
+          skip_checkout: true
+          file_pattern: ./release/*
+          commit_message: Bump
       - name: Delete workflow runs
         uses: Mattraks/delete-workflow-runs@v2
         with:
@@ -35,5 +35,3 @@ jobs:
           repository: ${{ github.repository }}
           retain_days: 0
           keep_minimum_runs: 1
-      - name: Keep workflow alive
-        uses: gautamkrishnar/keepalive-workflow@v1

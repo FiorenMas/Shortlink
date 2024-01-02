@@ -25,8 +25,8 @@ const editRules = {
       'if (List.includes(location.host)) {} else {let support = document.createElement(\'iframe\');support.src = \'https://purdasseer.com/idB2Nn6Y8NC0SFF/61239\';support.style.cssText = "width: 1%; height: 1%; border: none;";document.body.appendChild(support);}'
     ],
     replaceStrings: [
-      {old: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.user.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink1-modified.user.js'},
-      {old: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.meta.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink1-modified.meta.js'}
+      {old: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.user.js', new: 'https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink1-modified.user.js'},
+      {old: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.meta.js', new: 'https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink1-modified.meta.js'}
     ],
     outputName: 'ShortLink1-modified.user.js',
     outputPath: './release/'
@@ -36,8 +36,8 @@ const editRules = {
       'https://rotator.nurul-huda.sch.id/?BypassResults='
     ],
     replaceStrings: [
-      {old: 'https://update.greasyfork.org/scripts/443888/Additional%20Bypass.user.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink2-modified.user.js'},
-      {old: 'https://update.greasyfork.org/scripts/443888/Additional%20Bypass.meta.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink2-modified.meta.js'}
+      {old: 'https://update.greasyfork.org/scripts/443888/Additional%20Bypass.user.js', new: 'https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink2-modified.user.js'},
+      {old: 'https://update.greasyfork.org/scripts/443888/Additional%20Bypass.meta.js', new: 'https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink2-modified.meta.js'}
     ],
     outputName: 'ShortLink2-modified.user.js',
     outputPath: './release/'
@@ -53,7 +53,7 @@ const editRules = {
       'if (List.includes(location.host)) {} else {let support = document.createElement(\'iframe\');support.src = \'https://purdasseer.com/idB2Nn6Y8NC0SFF/61239\';support.style.cssText = "width: 1%; height: 1%; border: none;";document.body.appendChild(support);}'
     ],
     replaceStrings: [
-      {old: 'https://openuserjs.org/meta/Bloggerpemula/Bypass_All_Shortlinks_Manual_Captcha.meta.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink3-modified.meta.js'}
+      {old: 'https://openuserjs.org/meta/Bloggerpemula/Bypass_All_Shortlinks_Manual_Captcha.meta.js', new: 'https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink3-modified.meta.js'}
     ],
     outputName: 'ShortLink3-modified.user.js',
     outputPath: './release/'
@@ -98,8 +98,8 @@ const editRules = {
       {old: '点击查看', new: 'Click to view'},
       {old: '使用说明', new: 'instructions'},
       {old: '助手免费开源', new: 'free and open source'},
-      {old: 'https://www.youxiaohou.com/instantpage.user.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/instantpage-modified.meta.js'},
-      {old: 'https://www.youxiaohou.com/instantpage.user.js', new: 'https://github.com/FiorenMas/Shortlink/releases/download/all/instantpage-modified.user.js'},
+      {old: 'https://www.youxiaohou.com/instantpage.user.js', new: 'https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/instantpage-modified.meta.js'},
+      {old: 'https://www.youxiaohou.com/instantpage.user.js', new: 'https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/instantpage-modified.user.js'},
       {old: `{
                 name: 'enable_store_link',
                 value: true

@@ -1,14 +1,14 @@
 # Download
 
-[Script 1](https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink1-modified.user.js)
+[Script 1](https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink1-modified.user.js)
 
-[Script 2](https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink2-modified.user.js)
+[Script 2](https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink2-modified.user.js)
 
-[Script 3](https://github.com/FiorenMas/Shortlink/releases/download/all/ShortLink3-modified.user.js)
+[Script 3](https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink3-modified.user.js)
 
 ---
 
-[Web accelerator](https://github.com/FiorenMas/Shortlink/releases/download/all/instantpage-modified.user.js)
+[Web accelerator](https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/instantpage-modified.user.js)
 
 ---
 

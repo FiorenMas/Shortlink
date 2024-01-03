@@ -4,7 +4,7 @@ on:
     - cron: "0 1 * * *"
   workflow_dispatch:
 jobs:
-  patch1:
+  edit:
     name: Edit
     permissions: write-all
     runs-on: ubuntu-latest
@@ -24,7 +24,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           branch: release
-          default_author: github_actions
           skip_checkout: true
           file_pattern: ./release/*
           commit_message: Bump

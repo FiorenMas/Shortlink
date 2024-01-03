@@ -26,6 +26,7 @@ jobs:
           branch: release
           skip_checkout: true
           skip_dirty_check: true
+          push_options: '--force'
           file_pattern: ./release/*
           commit_message: Bump
       - name: Delete workflow runs

@@ -25,6 +25,7 @@ jobs:
         with:
           branch: release
           skip_checkout: true
+          skip_dirty_check: true
           file_pattern: ./release/*
           commit_message: Bump
       - name: Delete workflow runs

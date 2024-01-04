@@ -5,7 +5,7 @@ const async = require('async');
 const folder = './release/';
 
 const filesToDownload = [
-  {name: 'base1.user.js', url: 'https://update.greasyfork.org/scripts/431691/1305892/Bypass%20All%20Shortlinks.user.js'},
+  {name: 'base1.user.js', url: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.user.js'},
   {name: 'base2.user.js', url: 'https://update.greasyfork.org/scripts/443888/Additional%20Bypass.user.js'},
   {name: 'base3.user.js', url: 'https://openuserjs.org/install/Bloggerpemula/Bypass_All_Shortlinks_Manual_Captcha.user.js'},
   {name: 'base4.user.js', url: 'https://www.youxiaohou.com/instantpage.user.js'}

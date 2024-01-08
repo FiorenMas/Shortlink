@@ -10,6 +10,8 @@
 
 [Web accelerator](https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/instantpage-modified.user.js)
 
+[Pan baidu](https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/panlinker.user.js)
+
 ---
 
 ### ⚠️ Credit:

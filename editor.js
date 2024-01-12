@@ -78,7 +78,8 @@ const editRules = {
                         history.go(0);
                     }
                 });
-            });`
+            });`,
+      `<label class="instant-setting-label">Accelerate Extension/App Store Link <input type="checkbox" id="S-Store" ${util.getValue('enable_store_link') ? 'checked' : ''} class="instant-setting-checkbox"></label>`
     ],
     replaceStrings: [
       {old: '网页加速器', new: 'Web accelerator'},

@@ -16,14 +16,11 @@ function extractRegexFromJs(jsCode) {
 }
 function writeListOfStringsToFile(filename, lines) {
     fs.writeFileSync(filename, lines.join('\n'), { encoding: 'utf-8' });
-    console.log(`OK: Generated ${filename}`);
 }
-
 function generateIncludeLines(regexList) {
     let includeRules = [];
     let matchRules = [];
     let includeAndMatchLines = [];
-
     regexList.forEach(regex => {
         regex = regex.replace(/\/|\\/g, '');
         if (/[|()*]/.test(regex)) {
@@ -41,7 +38,6 @@ function generateIncludeLines(regexList) {
     });
     writeListOfStringsToFile('includes.txt', includeAndMatchLines);
 }
-
 function include_write() {
     const fs = require('fs');
     let script_lines = fs.readFileSync('./release/ShortLink1-modified-include.user.js', 'utf-8').split('\n');
@@ -80,7 +76,7 @@ function findAndReplaceURLs() {
     }
   });
 }
-function main() {
+function findRegex() {
     const filePath = './release/ShortLink1-modified-include.user.js';
     try {
         const jsCode = fs.readFileSync(filePath, { encoding: 'utf-8' });
@@ -103,6 +99,6 @@ function main() {
         }
     }
 }
-main();
+findRegex();
 include_write();
 findAndReplaceURLs();

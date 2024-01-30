@@ -23,10 +23,13 @@ function generateIncludeLines(regexList) {
     let includeRules = [];
     let matchRules = [];
     let includeAndMatchLines = [];
-    for (let regex of regexList) {
+
+    regexList.forEach(regex => {
+        regex = regex.replace(/\/|\\/g, '');
+        //regex = regex.replace(/\//g, '').replace(/\\/g, '');
         if (/[|()*]/.test(regex)) {
             regex = '(' + regex + ')';
-            let includeRule = `/^(https?:\\/\\/)(.+)${regex.replace('.', '\\.')}(\\/.*)/`;
+            let includeRule = `/^(https?:\\/\\/)(.+)?${regex}(\\/.*)/`;
             includeRules.push(includeRule);
             let includeLine = "// @include " + includeRule;
             includeAndMatchLines.push(includeLine);
@@ -36,9 +39,14 @@ function generateIncludeLines(regexList) {
             let matchLine = '// @match ' + matchRule;
             includeAndMatchLines.push(matchLine);
         }
-    }
+    });
+
+    writeListOfStringsToFile('supported_sites.txt', regexList);
+    writeListOfStringsToFile('match_rules.txt', matchRules);
+    writeListOfStringsToFile('include_rules.txt', includeRules);
     writeListOfStringsToFile('includes.txt', includeAndMatchLines);
 }
+
 function include_write() {
     const fs = require('fs');
     let script_lines = fs.readFileSync('./release/ShortLink1-modified-include.user.js', 'utf-8').split('\n');

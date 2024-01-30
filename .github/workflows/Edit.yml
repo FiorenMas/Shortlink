@@ -17,7 +17,6 @@ jobs:
       - name: Edit
         run: |
           npm install async
-          npm install regex-parser
           mkdir ./release
           chmod +x editor.js include.js
           ./editor.js

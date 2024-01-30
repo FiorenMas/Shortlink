@@ -26,7 +26,6 @@ function generateIncludeLines(regexList) {
 
     regexList.forEach(regex => {
         regex = regex.replace(/\/|\\/g, '');
-        //regex = regex.replace(/\//g, '').replace(/\\/g, '');
         if (/[|()*]/.test(regex)) {
             regex = '(' + regex + ')';
             let includeRule = `/^(https?:\\/\\/)(.+)?${regex}(\\/.*)/`;

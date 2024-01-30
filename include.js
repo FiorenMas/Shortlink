@@ -46,7 +46,8 @@ function readAndReplaceIncludeLines() {
       console.error(`Error: Failed to read includes.txt`);
     }
     else {
-      let includeLines = data.split('\n').join('\n');
+      let includeLines = data.split('\n').filter((line) => !line.startsWith('// @match *'));
+      includeLines = includeLines.join('\n');
       fs.readFile('./release/ShortLink1-modified-include.user.js', 'utf8', (err, data) => {
         if (err) {
           console.error(`Error: Failed to read ShortLink1-modified-include.user.js`);

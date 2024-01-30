@@ -46,19 +46,20 @@ function readAndReplaceIncludeLines() {
       console.error(`Error: Failed to read includes.txt`);
     }
     else {
-      let includeLines = data.split('\n').find(line => line === '// @match *');
+      let includeLine = data.split('\n').find(line => line === '// @match *');
+      includeLine = includeLine || '';
       fs.readFile('./release/ShortLink1-modified-include.user.js', 'utf8', (err, data) => {
         if (err) {
           console.error(`Error: Failed to read ShortLink1-modified-include.user.js`);
         }
         else {
-          let newData = data.replace('// @match          *://*/*', includeLines);
+          let newData = data.replace('// @match          *://*/*', includeLine);
           fs.writeFile('./release/ShortLink1-modified-include.user.js', newData, 'utf8', (err) => {
             if (err) {
               console.error(`Error: Failed to write to ShortLink1-modified-include.user.js`);
             }
             else {
-              console.log(`OK: Replaced the include lines in ShortLink1-modified-include.user.js`);
+              console.log(`OK: Replaced the include line in ShortLink1-modified-include.user.js`);
             }
           });
         }

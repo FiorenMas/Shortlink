@@ -40,10 +40,6 @@ function generateIncludeLines(regexList) {
             includeAndMatchLines.push(matchLine);
         }
     });
-
-    writeListOfStringsToFile('supported_sites.txt', regexList);
-    writeListOfStringsToFile('match_rules.txt', matchRules);
-    writeListOfStringsToFile('include_rules.txt', includeRules);
     writeListOfStringsToFile('includes.txt', includeAndMatchLines);
 }
 

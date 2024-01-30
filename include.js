@@ -1,75 +1,63 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const readline = require('readline');
-const regexParser = require('regex-parser');
-const pattern1 = /BypassedByBloggerPemula\((.*?),/;
-const pattern2 = /BloggerPemula\('([^']+)',/;
-const pattern3 = /RemoveBp\('([^']+)',/;
-const pattern4 = /case '(.*?)':/;
-const pattern5 = /h\.href\.includes\('(.*?)'\)/;
-function regexToIncludeLine(regex) {
-  if (regex.includes('|') || regex.includes('(') || regex.includes(')') || regex.includes('*')) {
-    regex = '(' + regex + ')';
-    includeLine = `// @include /^(https?:\/\/)(.+?)` + regex + `(\/.*)/`;
-    includeLine = includeLine.replace( `\\.*)(\/.*)/`, `\\.*)/` );
-  }
-  else {
-    includeLine = '// @match *://*.' + regex + '/*';
-  }
-  return includeLine;
+function extractRegexFromJs(jsCode) {
+    const pattern1 = /(?<!\/\/)BypassedByBloggerPemula\((.*?),/g;
+    let matches1 = [...jsCode.matchAll(pattern1)].map(match => match[1].trim('/'));
+    const pattern2 = /(?<!\/\/)BloggerPemula\('([^']+)',/g;
+    let matches2 = [...jsCode.matchAll(pattern2)].map(match => match[1]);
+    const pattern3 = /(?<!\/\/)RemoveBp\('([^']+)',/g;
+    let matches3 = [...jsCode.matchAll(pattern3)].map(match => match[1]);
+    const pattern4 = /(?<!\/\/)case '(.*?)':/g;
+    let matches4 = [...jsCode.matchAll(pattern4)].map(match => match[1]);
+    const pattern5 = /h\.href\.includes\('(.*?)'\)/g;
+    let matches5 = [...jsCode.matchAll(pattern5)].map(match => match[1]);
+    return [...matches1, ...matches2, ...matches3, ...matches4, ...matches5];
 }
-function generateIncludeLines(regexList) {
-  let includeLines = [];
-  for (let regex of regexList) {
-    let includeLine = regexToIncludeLine(regex);
-    includeLines.push(includeLine);
-  }
-  return includeLines;
-}
-function writeToFile(filename, lines) {
-  fs.writeFile(filename, lines.join('\n'), 'utf8', (err) => {
-    if (err) {
-      console.error(`Error: Failed to write to ${filename}`);
-    }
-    else {
-      console.log(`OK: Generated ${filename}`);
-    }
-  });
-}
-function compileAndPrint(regexStrings) {
-  let includeLines = generateIncludeLines(regexStrings);
-  writeToFile('includes.txt', includeLines);
-}
-function readAndReplaceIncludeLines() {
-  fs.readFile('includes.txt', 'utf8', (err, data) => {
-    if (err) {
-      console.error(`Error: Failed to read includes.txt`);
-    }
-    else {
-      let matchLine = /^\/\/ @match \*\/\*\/\*$/;
-      let includeLines = data.split('\n').filter((line) => !matchLine.test(line)).join('\n');
-      fs.readFile('./release/ShortLink1-modified-include.user.js', 'utf8', (err, data) => {
-        if (err) {
-          console.error(`Error: Failed to read ShortLink1-modified-include.user.js`);
-        }
-        else {
-          let newData = data.replace('// @match          *://*/*', includeLines);
-          fs.writeFile('./release/ShortLink1-modified-include.user.js', newData, 'utf8', (err) => {
-            if (err) {
-              console.error(`Error: Failed to write to ShortLink1-modified-include.user.js`);
-            }
-            else {
-              console.log(`OK: Replaced the include lines in ShortLink1-modified-include.user.js`);
-            }
-          });
-        }
-      });
-    }
-  });
+function writeListOfStringsToFile(filename, lines) {
+    fs.writeFileSync(filename, lines.join('\n'), { encoding: 'utf-8' });
+    console.log(`OK: Generated ${filename}`);
 }
 
+function generateIncludeLines(regexList) {
+    let includeRules = [];
+    let matchRules = [];
+    let includeAndMatchLines = [];
+    for (let regex of regexList) {
+        if (/[|()*]/.test(regex)) {
+            regex = '(' + regex + ')';
+            let includeRule = `/^(https?:\\/\\/)(.+)${regex.replace('.', '\\.')}(\\/.*)/`;
+            includeRules.push(includeRule);
+            let includeLine = "// @include " + includeRule;
+            includeAndMatchLines.push(includeLine);
+        } else {
+            let matchRule = `*://*.${regex}/*`;
+            matchRules.push(matchRule);
+            let matchLine = '// @match ' + matchRule;
+            includeAndMatchLines.push(matchLine);
+        }
+    }
+    writeListOfStringsToFile('includes.txt', includeAndMatchLines);
+}
+function include_write() {
+    const fs = require('fs');
+    let script_lines = fs.readFileSync('./release/ShortLink1-modified-include.user.js', 'utf-8').split('\n');
+    let includes_content = fs.readFileSync('includes.txt', 'utf-8');
+    script_lines = script_lines.filter(s => !(s.startsWith("// @description:") || s.startsWith("// @name:")));
+    script_lines = script_lines.filter(line => !line.includes('@match') && !line.includes('@include'));
+    let last_description_line_index = null;
+    for (let i = script_lines.length - 1; i >= 0; i--) {
+        if (script_lines[i].startsWith('// @description')) {
+            last_description_line_index = i;
+            break;
+        }
+    }
+    script_lines.splice(last_description_line_index + 1, 0, includes_content);
+    fs.writeFileSync('./release/ShortLink1-modified-include.user.js', script_lines.join('\n'));
+    console.log(`@Include lines added.`);
+}
 function findAndReplaceURLs() {
-  fs.readFile('./release/ShortLink1-modified-include.user.js', 'utf8', (err, data) => {
+  fs.readFileSync('./release/ShortLink1-modified-include.user.js', 'utf8', (err, data) => {
     if (err) {
       console.error(`Error: Failed to read ShortLink1-modified-include.user.js`);
     }
@@ -90,50 +78,28 @@ function findAndReplaceURLs() {
   });
 }
 function main() {
-  let filePath = './release/ShortLink1-modified-include.user.js';
-  let rl = readline.createInterface({
-    input: fs.createReadStream(filePath, 'utf8'),
-    output: null,
-    terminal: false
-  });
-  let regexStrings = [];
-  rl.on('line', (line) => {
-    let match1 = line.match(pattern1);
-    let match2 = line.match(pattern2);
-    let match3 = line.match(pattern3);
-    let match4 = line.match(pattern4);
-    let match5 = line.match(pattern5);
-    if (match1) {
-      let regex = match1[1].replace(/\//g, '');
-      regexStrings.push(regex);
+    const filePath = './release/ShortLink1-modified-include.user.js';
+    try {
+        const jsCode = fs.readFileSync(filePath, { encoding: 'utf-8' });
+        let regexStrings = extractRegexFromJs(jsCode);
+        regexStrings = regexStrings.filter(s => s.includes('.') && s.length >= 5);
+        const blockedWordsForIncludes = [
+            "google",
+            "youtube",
+            "twitter.com",
+            "tiktok.com",
+            "vk.com"
+        ];
+        regexStrings = regexStrings.filter(s => !blockedWordsForIncludes.some(word => s.includes(word)));
+        generateIncludeLines(regexStrings);
+    } catch (error) {
+        if (error.code === 'ENOENT') {
+            console.error(`Error: File '${filePath}' not found.`);
+        } else {
+            console.error(`An error occurred: ${error}`);
+        }
     }
-    if (match2) {
-      let regex = match2[1];
-      regexStrings.push(regex);
-    }
-    if (match3) {
-      let regex = match3[1];
-      regexStrings.push(regex);
-    }
-    if (match4) {
-      let regex = match4[1];
-      regexStrings.push(regex);
-    }
-    if (match5) {
-      let regex = match5[1];
-      regexStrings.push(regex);
-    }
-  });
-  rl.on('close', () => {
-    regexStrings = regexStrings.filter((s) => s.includes('.') && s.length >= 5);
-    let blockedWordsForIncludes = [
-      'google',
-      'youtube'
-    ];
-    regexStrings = regexStrings.filter((s) => !blockedWordsForIncludes.some((word) => s.includes(word)));
-    compileAndPrint(regexStrings);
-    readAndReplaceIncludeLines();
-  });
 }
 main();
+include_write();
 findAndReplaceURLs();

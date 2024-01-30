@@ -10,7 +10,7 @@ const pattern5 = /h\.href\.includes\('(.*?)'\)/;
 function regexToIncludeLine(regex) {
   if (regex.includes('|') || regex.includes('(') || regex.includes(')') || regex.includes('*')) {
     regex = '(' + regex + ')';
-    includeLine = `// @include /^(https?:\\/\\/)(.+?)` + regex + `(\\/.*)/`;
+    includeLine = `// @include /^(https?:\/\/)(.+?)` + regex + `(\/.*)/`;
     includeLine = includeLine.replace( `\\.*)(\/.*)/`, `\\.*)/` );
   }
   else {

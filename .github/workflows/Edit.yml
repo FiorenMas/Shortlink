@@ -22,6 +22,7 @@ jobs:
           ./editor.js
           cp ./release/ShortLink1-modified.user.js ./release/ShortLink1-modified-include.user.js
           ./include.js
+          bash convert.sh
       - name: Release
         uses: stefanzweifel/git-auto-commit-action@v4
         with:

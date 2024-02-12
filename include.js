@@ -87,7 +87,8 @@ function findRegex() {
             "youtube",
             "twitter.com",
             "tiktok.com",
-            "vk.com"
+            "vk.com",
+            "facebook.com"
         ];
         regexStrings = regexStrings.filter(s => !blockedWordsForIncludes.some(word => s.includes(word)));
         generateIncludeLines(regexStrings);

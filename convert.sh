@@ -22,8 +22,8 @@ done
 # Switch @downloadURL and @updateURL to our repository
 for file in meta/*.meta.js; do
   base=$(basename "$file" .meta.js)
-  sed -i "s|// @downloadURL .*|// @downloadURL https://raw.githubusercontent.com/$repository/release/release/$base.user.js|" "$file"
-  sed -i "s|// @updateURL .*|// @updateURL  https://raw.githubusercontent.com/$repository/release/release/$base.meta.js|" "$file"
+  sed -i "s|// @downloadURL .*|// @downloadURL https://raw.githubusercontent.com/$repository/raw/release/release/$base.user.js|" "$file"
+  sed -i "s|// @updateURL .*|// @updateURL  https://raw.githubusercontent.com/$repository/raw/release/release/$base.meta.js|" "$file"
 done
 
 # Parallel compile js files

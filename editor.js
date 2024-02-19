@@ -17,6 +17,7 @@ const filesToEdit = ['ShortLink1-modified.user.js', 'ShortLink2-modified.user.js
 const editRules = {
   'base1.user.js': {
     removeStrings: [
+      `// @antifeature    tracking`,
       'https://free4u.nurul-huda.or.id/?BypassResults=',
       'https://rotator.nurul-huda.sch.id/?BypassResults=',
       "$('a.get-link').text('Bypassed by Bloggerpemula');",
@@ -37,6 +38,7 @@ const editRules = {
   },
   'base2.user.js': {
     removeStrings: [
+      `// @antifeature    tracking`,
       'https://rotator.nurul-huda.sch.id/?BypassResults='
     ],
     replaceStrings: [
@@ -48,6 +50,7 @@ const editRules = {
   },
   'base3.user.js': {
     removeStrings: [
+      `// @antifeature    tracking`,
       'https://free4u.nurul-huda.or.id/?BypassResults=',
       'https://rotator.nurul-huda.sch.id/?BypassResults=',
       "$('a.get-link').text('Bypassed by Bloggerpemula');",

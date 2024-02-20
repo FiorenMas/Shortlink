@@ -22,7 +22,8 @@ jobs:
           ./editor.js
           cp ./release/ShortLink1-modified.user.js ./release/ShortLink1-modified-include.user.js
           ./include.js
-          bash convert.sh
+      - name: Convert
+        run: bash convert.sh
         env:
           repository: ${{ github.repository }}
       - name: Release

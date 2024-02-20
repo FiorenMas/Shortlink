@@ -3,17 +3,12 @@
 # Install Terser
 npm install terser -g
 # Make directories
-mkdir download pr-js meta js release
+mkdir convert pr-js meta js
 
-# Download userscripts
-count=1
-while read -r url; do
-  wget -q -U "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/119.0" "$url" -O "download/$count.user.js"
-  count=$((count+1))
-done < <(grep -v -E '^#|^[[:space:]]*$' List)
+mv release/*.user.js convert
 
 # Split userscript to meta file and js file
-for file in download/*.user.js; do
+for file in convert/*.user.js; do
   base=$(basename "$file" .user.js)
   sed -n '/\/\/ ==UserScript==/,/\/\/ ==\/UserScript==/p' "$file" > "meta/$base.meta.js"
   sed -n '/\/\/ ==\/UserScript==/,$p' "$file" | tail -n +2 > "pr-js/$base.js"

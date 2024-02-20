@@ -5,7 +5,10 @@ npm install terser -g
 # Make directories
 mkdir convert pr-js meta js
 
-mv release/*.user.js convert
+declare -a files=("ShortLink1-modified" "ShortLink1-modified-include" "ShortLink2-modified" "ShortLink3-modified" "instantpage-modified" "panlinker-modified")
+for i in "${!files[@]}"; do 
+  mv "release/${files[$i]}.user.js" "convert/$((i+1)).user.js"
+done
 
 # Split userscript to meta file and js file
 for file in convert/*.user.js; do

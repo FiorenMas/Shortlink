@@ -23,6 +23,8 @@ jobs:
           cp ./release/ShortLink1-modified.user.js ./release/ShortLink1-modified-include.user.js
           ./include.js
           bash convert.sh
+        env:
+          repository: ${{ github.repository }}
       - name: Release
         uses: stefanzweifel/git-auto-commit-action@v4
         with:

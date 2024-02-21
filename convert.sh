@@ -7,7 +7,7 @@ mkdir convert pr-js meta js
 
 declare -a files=("ShortLink1-modified" "ShortLink1-modified-include" "ShortLink2-modified" "ShortLink3-modified" "instantpage-modified" "panlinker-modified")
 for i in "${!files[@]}"; do 
-  mv "release/${files[$i]}.user.js" "convert/$((i+1)).user.js"
+  cp "release/${files[$i]}.user.js" "convert/$((i+1)).user.js"
 done
 
 # Split userscript to meta file and js file

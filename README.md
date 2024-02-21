@@ -20,9 +20,11 @@ Closure Compiler:
 
 [Script 2](https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/3.user.js)
 
-[Web accelerator](https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/4.user.js)
+[Script 3](https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/4.user.js)
 
-[Pan baidu](https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/5.user.js)
+[Web accelerator](https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/5.user.js)
+
+[Pan baidu](https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/6.user.js)
 
 ---
 

@@ -400,17 +400,26 @@ const editRules = {
 };
 
 function downloadFile(file, callback) {
-  const fileStream = fs.createWriteStream(file.name);
   https.get(file.url, (response) => {
-    response.pipe(fileStream);
+    if (response.statusCode === 200) {
+      const fileStream = fs.createWriteStream(file.name);
+      response.pipe(fileStream);
+      fileStream.on('finish', () => {
+        fileStream.close();
+        console.log('Downloaded ' + file.name);
+        callback(null);
+      });
+    } else {
+      console.error('File not found: ' + file.name);
+      callback(new Error('File not found'));
+    }
     response.on('error', (err) => {
       console.error(err);
       callback(err);
     });
-    response.on('end', () => {
-      console.log('Downloaded ' + file.name);
-      callback(null);
-    });
+  }).on('error', (err) => {
+    console.error('Error with the request:', err.message);
+    callback(err);
   });
 }
 

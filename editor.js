@@ -28,13 +28,6 @@ const editRules = {
       `let visitors = document.createElement('iframe');visitors.src = 'https://menrealitycalc.com/greasyfork';visitors.style.cssText = "width: 0; height: 0; border: none;";document.body.appendChild(visitors);let btz = bp('.banner-ad > script:nth-child(9)' || '.panel-body > script:nth-child(7)' || 'div.adb-top > script:nth-child(10)');`,
       `let visitors = document.createElement('iframe');visitors.src = 'https://menrealitycalc.com/openuserjs';visitors.style.cssText = "width: 0; height: 0; border: none;";document.body.appendChild(visitors);let btz = bp('.banner-ad > script:nth-child(9)' || '.panel-body > script:nth-child(7)' || 'div.adb-top > script:nth-child(10)');`
     ],
-    addStrings: [
-      {
-        search: 'BypassedByBloggerPemula',
-        add: `BypassedByBloggerPemula(/linkvertise.com/, function() {if (elementExists('lv-action-box')) {location = 'https://adbypass.org/bypass?bypass=' + location.href.split('?')[0];}});`,
-        occurrence: 2
-      }
-    ],
     replaceStrings: [
       {old: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.user.js', new: 'https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink1-modified.user.js'},
       {old: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.meta.js', new: 'https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink1-modified.meta.js'}
@@ -437,31 +430,24 @@ function editFile(file, callback) {
       callback(err);
       return;
     }
-    for (let removeString of rules.removeStrings) {
-      data = data.replace(new RegExp(removeString, 'g'), '');
-    }
-    for (let replaceString of rules.replaceStrings) {
-      data = data.replace(new RegExp(replaceString.old, 'g'), replaceString.new);
-    }
+    let newData = data;
     if (rules.addStrings) {
       for (let addString of rules.addStrings) {
-        let occurrences = data.match(new RegExp(addString.search, 'g')) || [];
-        let index = -1;
-        for (let i = 0; i < addString.occurrence; i++) {
-          index = data.indexOf(addString.search, index + 1);
-        }
-        if (index !== -1) {
-          // Find the index of the semicolon after the occurrence
-          let semicolonIndex = data.indexOf(';', index + addString.search.length);
-          if (semicolonIndex !== -1) {
-            const before = data.substring(0, semicolonIndex + 1);
-            const after = data.substring(semicolonIndex + 1);
-            data = before + '\n' + addString.add + '\n' + after;
-          }
+        const indexToAdd = newData.split('\n').findIndex(line => line.trim().startsWith(addString.search));
+        if (indexToAdd !== -1) {
+          const lines = newData.split('\n');
+          lines.splice(indexToAdd + 1, 0, addString.add);
+          newData = lines.join('\n');
         }
       }
     }
-    fs.writeFile(rules.outputPath + rules.outputName, data, 'utf8', (err) => {
+    for (let removeString of rules.removeStrings) {
+      newData = newData.replace(new RegExp(removeString, 'g'), '');
+    }
+    for (let replaceString of rules.replaceStrings) {
+      newData = newData.replace(new RegExp(replaceString.old, 'g'), replaceString.new);
+    }
+    fs.writeFile(rules.outputPath + rules.outputName, newData, 'utf8', (err) => {
       if (err) {
         console.error(err);
         callback(err);

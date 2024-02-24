@@ -429,7 +429,6 @@ function downloadFile(file, callback) {
     callback(err);
   });
 }
-
 function editFile(file, callback) {
   const rules = editRules[file.name];
   fs.readFile(file.name, 'utf8', (err, data) => {
@@ -438,7 +437,6 @@ function editFile(file, callback) {
       callback(err);
       return;
     }
-    // Remove strings
     for (let removeString of rules.removeStrings) {
       data = data.replace(new RegExp(removeString, 'g'), '');
     }
@@ -455,7 +453,7 @@ function editFile(file, callback) {
         if (index !== -1) {
           const before = data.substring(0, index + addString.search.length);
           const after = data.substring(index + addString.search.length);
-          data = before + '\n' + addString.add + after;
+          data = before + '\n' + addString.add + '\n' + after;
         }
       }
     }

@@ -31,7 +31,8 @@ const editRules = {
     addStrings: [
       {
         search: 'BypassedByBloggerPemula',
-        add: `BypassedByBloggerPemula(/linkvertise.com/, function() {if (elementExists('lv-action-box')) {location = 'https://adbypass.org/bypass?bypass=' + location.href.split('?')[0];}});` // This is the string to add
+        add: `BypassedByBloggerPemula(/linkvertise.com/, function() {if (elementExists('lv-action-box')) {location = 'https://adbypass.org/bypass?bypass=' + location.href.split('?')[0];}});`,
+        occurrence: 2
       }
     ],
     replaceStrings: [
@@ -437,15 +438,20 @@ function editFile(file, callback) {
       callback(err);
       return;
     }
+    // Remove strings
     for (let removeString of rules.removeStrings) {
-      data = data.replace(removeString, '');
+      data = data.replace(new RegExp(removeString, 'g'), '');
     }
     for (let replaceString of rules.replaceStrings) {
-      data = data.replace(replaceString.old, replaceString.new);
+      data = data.replace(new RegExp(replaceString.old, 'g'), replaceString.new);
     }
     if (rules.addStrings) {
       for (let addString of rules.addStrings) {
-        const index = data.indexOf(addString.search);
+        let occurrences = data.match(new RegExp(addString.search, 'g')) || [];
+        let index = -1;
+        for (let i = 0; i < addString.occurrence; i++) {
+          index = data.indexOf(addString.search, index + 1);
+        }
         if (index !== -1) {
           const before = data.substring(0, index + addString.search.length);
           const after = data.substring(index + addString.search.length);

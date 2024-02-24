@@ -31,7 +31,7 @@ const editRules = {
     addStrings: [
       {
         search: 'BypassedByBloggerPemula',
-        add: `  BypassedByBloggerPemula(/linkvertise.com/, function() {if (elementExists('lv-action-box')) {location = 'https://adbypass.org/bypass?bypass=' + location.href.split('?')[0];}});` // This is the string to add
+        add: `BypassedByBloggerPemula(/linkvertise.com/, function() {if (elementExists('lv-action-box')) {location = 'https://adbypass.org/bypass?bypass=' + location.href.split('?')[0];}});` // This is the string to add
       }
     ],
     replaceStrings: [

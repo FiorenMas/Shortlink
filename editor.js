@@ -451,9 +451,13 @@ function editFile(file, callback) {
           index = data.indexOf(addString.search, index + 1);
         }
         if (index !== -1) {
-          const before = data.substring(0, index + addString.search.length);
-          const after = data.substring(index + addString.search.length);
-          data = before + '\n' + addString.add + '\n' + after;
+          // Find the index of the semicolon after the occurrence
+          let semicolonIndex = data.indexOf(';', index + addString.search.length);
+          if (semicolonIndex !== -1) {
+            const before = data.substring(0, semicolonIndex + 1);
+            const after = data.substring(semicolonIndex + 1);
+            data = before + '\n' + addString.add + '\n' + after;
+          }
         }
       }
     }

@@ -28,6 +28,12 @@ const editRules = {
       `let visitors = document.createElement('iframe');visitors.src = 'https://menrealitycalc.com/greasyfork';visitors.style.cssText = "width: 0; height: 0; border: none;";document.body.appendChild(visitors);let btz = bp('.banner-ad > script:nth-child(9)' || '.panel-body > script:nth-child(7)' || 'div.adb-top > script:nth-child(10)');`,
       `let visitors = document.createElement('iframe');visitors.src = 'https://menrealitycalc.com/openuserjs';visitors.style.cssText = "width: 0; height: 0; border: none;";document.body.appendChild(visitors);let btz = bp('.banner-ad > script:nth-child(9)' || '.panel-body > script:nth-child(7)' || 'div.adb-top > script:nth-child(10)');`
     ],
+    addStrings: [
+      {
+        search: 'BypassedByBloggerPemula',
+        add: `BypassedByBloggerPemula(/linkvertise.com/, function() {if (elementExists('lv-action-box')) {location = 'https://adbypass.org/bypass?bypass=' + location.href.split('?')[0];}});` // This is the string to add
+      }
+    ],
     replaceStrings: [
       {old: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.user.js', new: 'https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink1-modified.user.js'},
       {old: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.meta.js', new: 'https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink1-modified.meta.js'}
@@ -437,6 +443,16 @@ function editFile(file, callback) {
     for (let replaceString of rules.replaceStrings) {
       data = data.replace(replaceString.old, replaceString.new);
     }
+    if (rules.addStrings) {
+      for (let addString of rules.addStrings) {
+        const index = data.indexOf(addString.search);
+        if (index !== -1) {
+          const before = data.substring(0, index + addString.search.length);
+          const after = data.substring(index + addString.search.length);
+          data = before + '\n' + addString.add + after;
+        }
+      }
+    }
     fs.writeFile(rules.outputPath + rules.outputName, data, 'utf8', (err) => {
       if (err) {
         console.error(err);
@@ -448,7 +464,6 @@ function editFile(file, callback) {
     });
   });
 }
-
 function createMetaFile(file, callback) {
   fs.readFile(folder + file, 'utf-8', (err, data) => {
     if (err) {

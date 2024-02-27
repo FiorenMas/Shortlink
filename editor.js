@@ -17,8 +17,9 @@ const filesToEdit = ['ShortLink1-modified.user.js', 'ShortLink2-modified.user.js
 const editRules = {
   'base1.user.js': {
     removeStrings: [
-      'https://free4u.nurul-huda.or.id/?BypassResults=',
-      'https://rotator.nurul-huda.sch.id/?BypassResults=',
+      `https://free4u.nurul-huda.or.id/?BypassResults=`,
+      `https://free4u.nurul-huda.or.id/?BypassResults=`,
+      `https://rotator.nurul-huda.sch.id/?BypassResults=`,
       "$('a.get-link').text('Bypassed by Bloggerpemula');",
       'Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula',
       'Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula',
@@ -48,8 +49,9 @@ const editRules = {
   },
   'base3.user.js': {
     removeStrings: [
-      'https://free4u.nurul-huda.or.id/?BypassResults=',
-      'https://rotator.nurul-huda.sch.id/?BypassResults=',
+      `https://free4u.nurul-huda.or.id/?BypassResults=`,
+      `https://free4u.nurul-huda.or.id/?BypassResults=`,
+      `https://rotator.nurul-huda.sch.id/?BypassResults=`,
       "$('a.get-link').text('Bypassed by Bloggerpemula');",
       'Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula',
       'Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula',

@@ -15,13 +15,9 @@ const filesToDownload = [
 const filesToEdit = ['ShortLink1-modified.user.js', 'ShortLink2-modified.user.js', 'ShortLink3-modified.user.js', 'instantpage-modified.user.js', 'panlinker-modified.user.js'];
 
 const editRules = {
-    'base1.user.js': {
+  'base1.user.js': {
     removeStrings: [
       'https://free4u.nurul-huda.or.id/?BypassResults=',
-      'https://free4u.nurul-huda.or.id/?BypassResults=',
-      'https://free4u.nurul-huda.or.id/?BypassResults=',
-      'https://rotator.nurul-huda.sch.id/?BypassResults=',
-      'https://rotator.nurul-huda.sch.id/?BypassResults=',
       'https://rotator.nurul-huda.sch.id/?BypassResults=',
       "$('a.get-link').text('Bypassed by Bloggerpemula');",
       'Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula',
@@ -31,12 +27,6 @@ const editRules = {
       'if (List.includes(location.host)) {} else {let support = document.createElement(\'iframe\');support.src = \'https://purdasseer.com/idB2Nn6Y8NC0SFF/61239\';support.style.cssText = "width: 1%; height: 1%; border: none;";document.body.appendChild(support);}',
       `let visitors = document.createElement('iframe');visitors.src = 'https://menrealitycalc.com/greasyfork';visitors.style.cssText = "width: 0; height: 0; border: none;";document.body.appendChild(visitors);let btz = bp('.banner-ad > script:nth-child(9)' || '.panel-body > script:nth-child(7)' || 'div.adb-top > script:nth-child(10)');`,
       `let visitors = document.createElement('iframe');visitors.src = 'https://menrealitycalc.com/openuserjs';visitors.style.cssText = "width: 0; height: 0; border: none;";document.body.appendChild(visitors);let btz = bp('.banner-ad > script:nth-child(9)' || '.panel-body > script:nth-child(7)' || 'div.adb-top > script:nth-child(10)');`
-    ],
-    addStrings: [
-      {
-        search: 'BypassedByBloggerPemula',
-        add: `BypassedByBloggerPemula(/linkvertise.com/, function() {if (elementExists('lv-action-box')) {location = 'https://adbypass.org/bypass?bypass=' + location.href.split('?')[0];}});`
-      }
     ],
     replaceStrings: [
       {old: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.user.js', new: 'https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink1-modified.user.js'},
@@ -59,10 +49,6 @@ const editRules = {
   'base3.user.js': {
     removeStrings: [
       'https://free4u.nurul-huda.or.id/?BypassResults=',
-      'https://free4u.nurul-huda.or.id/?BypassResults=',
-      'https://free4u.nurul-huda.or.id/?BypassResults=',
-      'https://rotator.nurul-huda.sch.id/?BypassResults=',
-      'https://rotator.nurul-huda.sch.id/?BypassResults=',
       'https://rotator.nurul-huda.sch.id/?BypassResults=',
       "$('a.get-link').text('Bypassed by Bloggerpemula');",
       'Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula',
@@ -436,6 +422,7 @@ function downloadFile(file, callback) {
     callback(err);
   });
 }
+
 function editFile(file, callback) {
   const rules = editRules[file.name];
   fs.readFile(file.name, 'utf8', (err, data) => {
@@ -444,24 +431,13 @@ function editFile(file, callback) {
       callback(err);
       return;
     }
-    let newData = data;
-    if (rules.addStrings) {
-      for (let addString of rules.addStrings) {
-        const indexToAdd = newData.split('\n').findIndex(line => line.trim().startsWith(addString.search));
-        if (indexToAdd !== -1) {
-          const lines = newData.split('\n');
-          lines.splice(indexToAdd + 1, 0, addString.add);
-          newData = lines.join('\n');
-        }
-      }
-    }
     for (let removeString of rules.removeStrings) {
-      newData = newData.replace(new RegExp(removeString, 'g'), '');
+      data = data.replace(removeString, '');
     }
     for (let replaceString of rules.replaceStrings) {
-      newData = newData.replace(new RegExp(replaceString.old, 'g'), replaceString.new);
+      data = data.replace(replaceString.old, replaceString.new);
     }
-    fs.writeFile(rules.outputPath + rules.outputName, newData, 'utf8', (err) => {
+    fs.writeFile(rules.outputPath + rules.outputName, data, 'utf8', (err) => {
       if (err) {
         console.error(err);
         callback(err);
@@ -472,6 +448,7 @@ function editFile(file, callback) {
     });
   });
 }
+
 function createMetaFile(file, callback) {
   fs.readFile(folder + file, 'utf-8', (err, data) => {
     if (err) {

@@ -26,8 +26,8 @@ const editRules = {
       'Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula',
       `Please Wait in @ Seconds , Don't Try to Remove/Replace My Blogs if You Want My Script to be Updated Regularly , Thanks`,
       'if (List.includes(location.host)) {} else {let support = document.createElement(\'iframe\');support.src = \'https://purdasseer.com/idB2Nn6Y8NC0SFF/61239\';support.style.cssText = "width: 1%; height: 1%; border: none;";document.body.appendChild(support);}',
-      `let visitors = document.createElement('iframe');visitors.src = 'https://menrealitycalc.com/greasyfork';visitors.style.cssText = "width: 0; height: 0; border: none;";document.body.appendChild(visitors);let btz = bp('.banner-ad > script:nth-child(9)' || '.panel-body > script:nth-child(7)' || 'div.adb-top > script:nth-child(10)');`,
-      `let visitors = document.createElement('iframe');visitors.src = 'https://menrealitycalc.com/openuserjs';visitors.style.cssText = "width: 0; height: 0; border: none;";document.body.appendChild(visitors);let btz = bp('.banner-ad > script:nth-child(9)' || '.panel-body > script:nth-child(7)' || 'div.adb-top > script:nth-child(10)');`
+      `let visitors = document.createElement('iframe');visitors.src = 'https://menrealitycalc.com/greasyfork';visitors.style.cssText = "width: 0; height: 0; border: 0;";document.body.appendChild(visitors);let btz = bp('.banner-ad > script:nth-child(9)' || '.panel-body > script:nth-child(7)' || 'div.adb-top > script:nth-child(10)');`,
+      `let visitors = document.createElement('iframe');visitors.src = 'https://menrealitycalc.com/openuserjs';visitors.style.cssText = "width: 0; height: 0; border: 0;";document.body.appendChild(visitors);let btz = bp('.banner-ad > script:nth-child(9)' || '.panel-body > script:nth-child(7)' || 'div.adb-top > script:nth-child(10)');`
     ],
     replaceStrings: [
       {old: 'https://update.greasyfork.org/scripts/431691/Bypass%20All%20Shortlinks.user.js', new: 'https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink1-modified.user.js'},
@@ -58,8 +58,8 @@ const editRules = {
       'Thanks for using Bypass All Shortlinks Scripts and for Donations , Regards : Bloggerpemula',
       `Please Wait in @ Seconds , Don't Try to Remove/Replace My Blogs if You Want My Script to be Updated Regularly , Thanks`,
       'if (List.includes(location.host)) {} else {let support = document.createElement(\'iframe\');support.src = \'https://purdasseer.com/idB2Nn6Y8NC0SFF/61239\';support.style.cssText = "width: 1%; height: 1%; border: none;";document.body.appendChild(support);}',
-      `let visitors = document.createElement('iframe');visitors.src = 'https://menrealitycalc.com/greasyfork';visitors.style.cssText = "width: 0; height: 0; border: none;";document.body.appendChild(visitors);let btz = bp('.banner-ad > script:nth-child(9)' || '.panel-body > script:nth-child(7)' || 'div.adb-top > script:nth-child(10)');`,
-      `let visitors = document.createElement('iframe');visitors.src = 'https://menrealitycalc.com/openuserjs';visitors.style.cssText = "width: 0; height: 0; border: none;";document.body.appendChild(visitors);let btz = bp('.banner-ad > script:nth-child(9)' || '.panel-body > script:nth-child(7)' || 'div.adb-top > script:nth-child(10)');`
+      `let visitors = document.createElement('iframe');visitors.src = 'https://menrealitycalc.com/greasyfork';visitors.style.cssText = "width: 0; height: 0; border: 0;";document.body.appendChild(visitors);let btz = bp('.banner-ad > script:nth-child(9)' || '.panel-body > script:nth-child(7)' || 'div.adb-top > script:nth-child(10)');`,
+      `let visitors = document.createElement('iframe');visitors.src = 'https://menrealitycalc.com/openuserjs';visitors.style.cssText = "width: 0; height: 0; border: 0;";document.body.appendChild(visitors);let btz = bp('.banner-ad > script:nth-child(9)' || '.panel-body > script:nth-child(7)' || 'div.adb-top > script:nth-child(10)');`
     ],
     replaceStrings: [
       {old: 'https://openuserjs.org/meta/Bloggerpemula/Bypass_All_Shortlinks_Manual_Captcha.meta.js', new: 'https://raw.githubusercontent.com/FiorenMas/Shortlink/release/release/ShortLink3-modified.meta.js'}

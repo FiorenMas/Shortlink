@@ -11,7 +11,7 @@ const filesToDownload = [
   {name: 'base5.user.js', url: 'https://www.youxiaohou.com/panlinker.user.js'}
 ]
 
-const filesToEdit = ['ShortLink1-modified.user.js', 'ShortLink2-modified.user.js', 'ShortLink3-modified.user.js', 'instantpage-modified.user.js', 'panlinker-modified.user.js'];
+const filesToEdit = ['ShortLink1-modified.user.js', 'ShortLink2-modified.user.js', 'instantpage-modified.user.js', 'panlinker-modified.user.js'];
 
 const editRules = {
   'base1.user.js': {
